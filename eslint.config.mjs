@@ -1,8 +1,6 @@
 /** @type {import('eslint').Linter.Config} */
 const config = {
   // Base Next.js configuration and core web vitals rules
-  // NOTE: next/core-web-vitals is an array of configs.
-  // We cannot use import here, so we remove the line that imported next.config.js.
   extends: ['next/core-web-vitals'],
   
   // Specifies the parser for TypeScript files
@@ -11,7 +9,7 @@ const config = {
   rules: {
     // --------------------------------------------------------
     // FIX 1 (CRITICAL): Downgrade 'no-explicit-any' to a warning.
-    // Allows the Vercel Serverless Functions (API Route) to compile.
+    // This allows the Vercel Serverless Functions (API Route) to compile.
     '@typescript-eslint/no-explicit-any': 'warn', 
 
     // FIX 2: Ensure other rules that might conflict are disabled or downgraded.
@@ -21,6 +19,7 @@ const config = {
   },
   parserOptions: {
     // Ensures ESLint can read TypeScript files correctly
+    // NOTE: We rely on Vercel/Next.js conventions, avoiding direct config imports.
     project: 'tsconfig.json',
   },
 };
