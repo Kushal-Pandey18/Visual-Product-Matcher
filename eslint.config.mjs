@@ -1,23 +1,22 @@
 /** @type {import('eslint').Linter.Config} */
 const config = {
   // Base Next.js configuration and core web vitals rules
+  // NOTE: next/core-web-vitals is an array of configs.
+  // We cannot use import here, so we remove the line that imported next.config.js.
   extends: ['next/core-web-vitals'],
+  
   // Specifies the parser for TypeScript files
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   rules: {
     // --------------------------------------------------------
-    // CRITICAL: Downgrade 'no-explicit-any' to a warning
-    // This allows the Vercel build to succeed because the 'any'
-    // type is necessary for certain Node.js library functions (canvas/fetch buffers).
+    // FIX 1 (CRITICAL): Downgrade 'no-explicit-any' to a warning.
+    // Allows the Vercel Serverless Functions (API Route) to compile.
     '@typescript-eslint/no-explicit-any': 'warn', 
 
-    // Other recommended clean code rules
+    // FIX 2: Ensure other rules that might conflict are disabled or downgraded.
     'no-unused-vars': 'warn',
     'prefer-const': 'error',
-    // We can disable the rule for Next.js Image component since we use raw <img>
-    // in ProductCard due to performance in SSR contexts.
-    '@next/next/no-img-element': 'off',
     // --------------------------------------------------------
   },
   parserOptions: {
