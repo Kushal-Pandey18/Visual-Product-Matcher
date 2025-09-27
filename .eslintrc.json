@@ -1,0 +1,14 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@next/next/no-img-element": "off",
+    "no-unused-vars": "warn",
+    "prefer-const": "warn"
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
